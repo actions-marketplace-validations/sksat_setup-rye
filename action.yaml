@@ -9,8 +9,12 @@ inputs:
   version:
     required: true
     description: rye version
-    # renovate: depName=mitsuhiko/rye datasource=github-releases
-    default: '0.5.0'
+    # renovate: depName=astral-sh/rye datasource=github-releases
+    default: '0.43.0'
+  use-uv:
+    required: false
+    description: behavior use use
+    default: 'false'
 
 runs:
   using: "composite"
@@ -21,5 +25,14 @@ runs:
       RYE_INSTALL_OPTION: '--yes'
       RYE_VERSION: ${{ inputs.version }}
     run: |
-      curl -sSf https://rye-up.com/get | bash
+      curl -sSf https://rye.astral.sh/get | bash
+
+  - name: setup rye path
+    shell: bash
+    run: |
       echo "$HOME/.rye/shims" >> $GITHUB_PATH
+
+  - name: setup uv behavior
+    shell: bash
+    if: ${{ inputs.use-uv == 'true' }}
+    run: rye config --set-bool behavior.use-uv=true

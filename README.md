@@ -1,3 +1,7 @@
+> [!TIP]
+>
+> FYI: You might want to use [uv](https://github.com/astral-sh/uv) & [astral-sh/setup-uv](https://github.com/astral-sh/setup-uv)
+
 # setup-rye
 
 This composite action install [rye](https://github.com/mitsuhiko/rye).
@@ -11,5 +15,5 @@ jobs:
   pytest:
     runs-on: ubuntu-latest
     steps:
-      - uses: sksat/setup-rye@v0.1.0
+      - uses: sksat/setup-rye@v0.8.0
 ```
